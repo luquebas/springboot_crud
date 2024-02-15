@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.springboot.models.ProductModel;
 import com.example.springboot.repositories.ProductRepository;
-
+import com.example.springboot.services.exceptions.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -23,7 +23,7 @@ public class ProductService {
 
     public ProductModel findById(UUID id) {
         Optional<ProductModel> product = productRepository.findById(id);
-        return product.orElseThrow(() -> new RuntimeException("Not Found"));
+        return product.orElseThrow(() -> new ObjectNotFoundException("Not Found"));
     }
 
     public List<ProductModel> findAllProducts() {
